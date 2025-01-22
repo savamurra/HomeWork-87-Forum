@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 import mongoDb from "./mongoDb";
 import usersRouter from "./routers/users";
 import postsRouter from "./routers/posts";
+import commentsRouter from "./routers/comments";
 
 
 const app = express();
@@ -12,6 +13,7 @@ app.use(express.json());
 app.use(express.static('public'));
 app.use('/users', usersRouter);
 app.use('/posts', postsRouter);
+app.use('/comments', commentsRouter);
 
 const run = async () => {
     await  mongoose.connect('mongodb://localhost:27017/forum');
