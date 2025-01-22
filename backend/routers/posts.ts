@@ -1,7 +1,7 @@
 import express from "express";
 import auth, {RequestWithUser} from "../middleware/auth";
 import mongoose from "mongoose";
-import {Post} from "../models/Post";
+import Post from "../models/Post";
 import {imagesUpload} from "../multer";
 
 const postsRouter = express.Router();
@@ -32,7 +32,7 @@ postsRouter.get("/", auth, async (req, res, next) => {
 postsRouter.get("/:id", auth, async (req, res, next) => {
     const id = req.params.id;
 
-    if (!req.params.id) {
+    if (!id) {
         res.status(404).send('Not Found');
     }
 
