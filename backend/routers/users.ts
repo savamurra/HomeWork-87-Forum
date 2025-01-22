@@ -74,8 +74,8 @@ usersRouter.delete('/sessions', async (req, res, next) => {
             return;
         }
 
-        user.token = '';
-        user.save();
+        user.generateToken();
+        await user.save();
         res.send(success);
         return;
     } catch (e) {
