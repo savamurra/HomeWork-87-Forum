@@ -2,6 +2,7 @@ import express from "express";
 import mongoose from "mongoose";
 import mongoDb from "./mongoDb";
 import usersRouter from "./routers/users";
+import postsRouter from "./routers/posts";
 
 
 const app = express();
@@ -10,6 +11,7 @@ const port = 8000;
 app.use(express.json());
 app.use(express.static('public'));
 app.use('/users', usersRouter);
+app.use('/posts', postsRouter);
 
 const run = async () => {
     await  mongoose.connect('mongodb://localhost:27017/forum');
