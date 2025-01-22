@@ -11,7 +11,7 @@ const run = async () => {
     try {
         await db.dropCollection("users");
         await db.dropCollection("posts");
-        await db.dropCollection("tracks");
+        await db.dropCollection("comments");
     } catch (error) {
         console.error(error);
     }
