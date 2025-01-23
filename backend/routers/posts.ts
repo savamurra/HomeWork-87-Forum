@@ -6,17 +6,8 @@ import {imagesUpload} from "../multer";
 
 const postsRouter = express.Router();
 
-postsRouter.get("/", auth, async (req, res, next) => {
-    const expressReq = req as RequestWithUser;
-
+postsRouter.get("/", async (req, res, next) => {
     try {
-        const user = expressReq.user;
-
-        if (!user) {
-            res.status(401).send({ error: "User not authorized" });
-            return;
-        }
-
         const posts = await Post.find()
             .sort({ datetime: -1 })
             .populate("user", "username")

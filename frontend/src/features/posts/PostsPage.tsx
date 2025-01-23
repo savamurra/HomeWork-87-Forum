@@ -1,4 +1,4 @@
-import { Card, CardContent, CardMedia, CircularProgress, Typography } from '@mui/material';
+import {Alert, Card, CardContent, CardMedia, CircularProgress, Typography} from '@mui/material';
 import Grid from '@mui/material/Grid2';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { useEffect } from 'react';
@@ -29,14 +29,12 @@ const PostsPage = () => {
 
     if (error) {
         return (
-            <Typography
-                variant="h6"
-                color="error"
-                textAlign="center"
+            <Alert
+                severity="error"
                 sx={{ mt: 4 }}
             >
-                Error loading posts
-            </Typography>
+                Error loading posts. Please try again later!
+            </Alert>
         );
     }
 
@@ -87,11 +85,12 @@ const PostsPage = () => {
                         by {post.user.username}
                       </Typography>
                       <Typography
+                          component={NavLink}
+                          to={`/posts/${post._id}`}
                         sx={{ fontSize: 15, fontWeight: "bold", flexGrow: 1 }}
                       >
                         {post.title}
                       </Typography>
-                      <NavLink to={`/posts/${post._id}`}>Just chillin...</NavLink>
                     </div>
                   </CardContent>
                 </Card>
