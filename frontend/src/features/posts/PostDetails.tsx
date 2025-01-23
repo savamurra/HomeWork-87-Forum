@@ -6,21 +6,32 @@ import { getPostById } from './postsThunk.ts';
 import { useParams } from 'react-router-dom';
 import dayjs from 'dayjs';
 import {apiUrl} from "../../globalConstants.ts";
+import { selectComments, selectErrorComments, selectLoadingComments } from '../comments/commentsSlice.ts';
+import {  getCommentsByQuery } from '../comments/commentsThunk.ts';
+import Comments from '../comments/Comments.tsx';
+import NewComment from '../components/CommentsForm/NewComment.tsx';
+import { selectUser } from '../users/userSlice.ts';
 
 const PostDetails = () => {
   const { id } = useParams<{ id: string }>();
   const postDetails = useAppSelector(selectPostDetails);
   const isLoading = useAppSelector(selectLoading);
   const error = useAppSelector(selectError);
+  const comments = useAppSelector(selectComments);
+  const isLoadingComments = useAppSelector(selectLoadingComments);
+  const errorComments = useAppSelector(selectErrorComments);
   const dispatch = useAppDispatch();
+  const user = useAppSelector(selectUser);
+
 
   useEffect(() => {
     if (id) {
       dispatch(getPostById(id));
+      dispatch(getCommentsByQuery(id))
     }
   }, [id, dispatch]);
 
-  if (isLoading) {
+  if (isLoading && isLoadingComments) {
     return (
       <div style={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
         <CircularProgress />
@@ -28,8 +39,8 @@ const PostDetails = () => {
     );
   }
 
-  if (error) {
-    return <Typography variant="h6" color="error" textAlign="center">Error loading post</Typography>;
+  if (error && errorComments) {
+    return <Typography variant="h6" color="error" textAlign="center">Error loading post and comments</Typography>;
   }
 
   if (!postDetails) {
@@ -75,7 +86,14 @@ const PostDetails = () => {
             Posted on {dayjs(postDetails.datetime).format('YYYY-MM-DD HH:mm:ss')} by {postDetails.user.username}
           </Typography>
           <hr/>
-          <Typography variant="h6" sx={{color: "green"}}  mt={4}>Add comments</Typography>
+          {!comments ? (<Typography>Not found comments</Typography>) : (
+            <>
+              {comments.map((comment) => (
+                <Comments key={comment._id} _id={comment._id} user={comment.user.username} text={comment.text}/>
+              )).reverse()}
+            </>
+          )}
+          {user ? (<NewComment _id={postDetails._id}/>) : null}
         </CardContent>
       </Card>
     </>

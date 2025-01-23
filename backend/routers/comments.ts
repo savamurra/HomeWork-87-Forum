@@ -12,7 +12,7 @@ commentsRouter.get('/', async (
     const idQuery = req.query.post as string;
     try {
         if(idQuery) {
-            const commentByIdPost = await Comment.find({post: idQuery}).sort({trackNumber: -1});
+            const commentByIdPost = await Comment.find({post: idQuery}).populate("user", "-_id username").populate("post", "-_id title");
             if(!commentByIdPost) res.status(404).send("Not Found");
             res.send(commentByIdPost);
         }
@@ -43,6 +43,7 @@ commentsRouter.post('/', auth, async (
         const post = await Post.findById(req.body.post);
         if (!post) res.status(404).send('Not Found post');
     }
+
     const commentData = {
         user: user._id,
         post: req.body.post,
