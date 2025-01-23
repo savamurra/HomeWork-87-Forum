@@ -1,25 +1,14 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { RootState } from '../../app/store.ts';
 import axiosApi from '../../axiosApi.ts';
 import { IPost } from './postsSlice.ts';
 
-export const fetchPosts = createAsyncThunk<IPost[], void, { state: RootState }>(
+export const fetchPosts = createAsyncThunk<IPost[], void>(
   "posts/fetchPosts",
-  async (_, { getState }) => {
-    const token = getState().users.user?.token;
-
-    if (!token) {
-      throw new Error("No token found");
-    }
-    const response = await axiosApi.get("/posts", {
-      headers: {
-        Authorization: token,
-      },
-    });
+  async () => {
+    const response = await axiosApi.get("/posts");
     return response.data;
   }
 );
-
 
 export const getPostById = createAsyncThunk<IPost, string>(
   'posts/getPostById',
