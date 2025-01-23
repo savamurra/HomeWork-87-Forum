@@ -5,6 +5,7 @@ import { useEffect } from 'react';
 import { getPostById } from './postsThunk.ts';
 import { useParams } from 'react-router-dom';
 import dayjs from 'dayjs';
+import {apiUrl} from "../../globalConstants.ts";
 
 const PostDetails = () => {
   const { id } = useParams<{ id: string }>();
@@ -35,7 +36,7 @@ const PostDetails = () => {
     return <Typography variant="h6" color="textSecondary" textAlign="center">Post not found</Typography>;
   }
 
-  const imageSrc = postDetails.image || "/text-image.jpg";
+    const imageSrc = postDetails.image ? `${apiUrl}/${postDetails.image}` : "/text-image.jpg";
 
   return (
     <>
