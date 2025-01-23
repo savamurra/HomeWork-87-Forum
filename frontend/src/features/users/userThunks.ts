@@ -1,4 +1,4 @@
-import { createAsyncThunk } from "@reduxjs/toolkit";
+import { createAsyncThunk } from '@reduxjs/toolkit';
 import {
   GlobalError,
   LoginMutation,
@@ -18,11 +18,11 @@ export const register = createAsyncThunk<
     rejectValue: ValidationError;
   }
 >(
-  "users/register",
+  'users/register',
   async (registerMutation: RegisterMutation, { rejectWithValue }) => {
     try {
       const response = await axiosApi.post<RegisterResponse>(
-        "/users",
+        '/users',
         registerMutation,
       );
       return response.data;

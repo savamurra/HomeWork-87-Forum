@@ -4,6 +4,7 @@ import { useAppDispatch } from "../../../app/hooks.ts";
 import { unsetUser } from "../../../features/users/userSlice.ts";
 import { logout } from "../../../features/users/userThunks.ts";
 import { UserFields } from "../../../types";
+import React from "react";
 
 interface Props {
   user: UserFields;
