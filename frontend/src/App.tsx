@@ -5,6 +5,7 @@ import { Route, Routes } from 'react-router-dom';
 import RegisterPage from './features/users/RegisterPage.tsx';
 import LoginPage from './features/users/LoginPage.tsx';
 import PostsPage from './features/posts/PostsPage.tsx';
+import PostDetails from './features/posts/PostDetails.tsx';
 
 const App = () => {
   return (
@@ -19,6 +20,7 @@ const App = () => {
             <Route path="/" element={<PostsPage/>}/>
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/login" element={<LoginPage />} />
+            <Route path="/posts/:id" element={<PostDetails/>}/>
             <Route path="*" element={<h1>Not found</h1>} />
           </Routes>
         </Container>

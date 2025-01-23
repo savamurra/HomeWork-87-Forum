@@ -1,6 +1,6 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import axiosApi from '../../axiosApi.ts';
-import { RootState } from '../../app/store.ts';
+import {createSlice} from '@reduxjs/toolkit';
+import {RootState} from '../../app/store.ts';
+import {fetchPosts, getPostById} from './postsThunk.ts';
 
 
 export interface IPost {
@@ -14,34 +14,23 @@ export interface IPost {
 
 interface PostState {
   posts: IPost[],
+    postDetails: IPost | null,
   isLoading: boolean,
   error: boolean,
 }
 
 const initialState: PostState = {
   posts: [],
+    postDetails: null,
   isLoading: false,
   error: false,
 };
 
 export const selectPost = (state: RootState) => state.posts.posts;
+export const selectPostDetails = (state: RootState) => state.posts.postDetails;
+export const selectLoading = (state: RootState) => state.posts.isLoading;
+export const selectError = (state: RootState) => state.posts.error;
 
-export const fetchPosts = createAsyncThunk<IPost[], void, { state: RootState }>(
-  "posts/fetchPosts",
-  async (_, { getState }) => {
-    const token = getState().users.user?.token;
-
-    if (!token) {
-      throw new Error("No token found");
-    }
-    const response = await axiosApi.get("/posts", {
-      headers: {
-        Authorization: token,
-      },
-    });
-    return response.data;
-  }
-);
 
 export const slicePosts = createSlice({
   name: "post",
@@ -60,7 +49,19 @@ export const slicePosts = createSlice({
       .addCase(fetchPosts.rejected, (state) => {
         state.isLoading = false;
         state.error = true;
-      });
+      })
+        .addCase(getPostById.pending, (state) => {
+            state.isLoading = true;
+            state.error = false;
+        })
+        .addCase(getPostById.fulfilled, (state, action) => {
+            state.isLoading = false;
+            state.postDetails = action.payload;
+        })
+        .addCase(getPostById.rejected, (state) => {
+            state.isLoading = false;
+            state.error = true;
+        });
   },
 });
 

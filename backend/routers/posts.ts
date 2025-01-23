@@ -31,7 +31,7 @@ postsRouter.get("/", auth, async (req, res, next) => {
     }
 });
 
-postsRouter.get("/:id", auth, async (req, res, next) => {
+postsRouter.get("/:id",  async (req, res, next) => {
     const id = req.params.id;
 
     if (!id) {
@@ -39,7 +39,8 @@ postsRouter.get("/:id", auth, async (req, res, next) => {
     }
 
     try {
-        const post = await Post.findById(id);
+        const post = await Post.findById(id)
+            .populate("user", "username");
 
         if (!post) res.status(404).send('Not Found');
 

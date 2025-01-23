@@ -1,21 +1,46 @@
-import { Card, CardContent, CardMedia, Typography } from '@mui/material';
+import { Card, CardContent, CardMedia, CircularProgress, Typography } from '@mui/material';
 import Grid from '@mui/material/Grid2';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
-import { fetchPosts, selectPost } from './postsSlice.ts';
 import { useEffect } from 'react';
 import dayjs from 'dayjs';
+import { NavLink } from 'react-router-dom';
+import {fetchPosts} from "./postsThunk.ts";
+import {selectError, selectLoading, selectPost} from "./postsSlice.ts";
 
 
 const PostsPage = () => {
   const posts = useAppSelector(selectPost);
+    const isLoading = useAppSelector(selectLoading);
+    const error = useAppSelector(selectError);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(fetchPosts());
   }, [dispatch]);
 
+    if (isLoading) {
+        return (
+            <div style={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
+                <CircularProgress />
+            </div>
+        );
+    }
 
-  return (
+    if (error) {
+        return (
+            <Typography
+                variant="h6"
+                color="error"
+                textAlign="center"
+                sx={{ mt: 4 }}
+            >
+                Error loading posts
+            </Typography>
+        );
+    }
+
+
+    return (
       <>
         <Typography
           variant="h4"
@@ -65,6 +90,7 @@ const PostsPage = () => {
                       >
                         {post.title}
                       </Typography>
+                      <NavLink to={`/posts/${post._id}`}>Just chillin...</NavLink>
                     </div>
                   </CardContent>
                 </Card>
