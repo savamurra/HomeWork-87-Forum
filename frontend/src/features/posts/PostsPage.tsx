@@ -6,6 +6,7 @@ import dayjs from 'dayjs';
 import { NavLink } from 'react-router-dom';
 import {fetchPosts} from "./postsThunk.ts";
 import {selectError, selectLoading, selectPost} from "./postsSlice.ts";
+import {apiUrl} from "../../globalConstants.ts";
 
 
 const PostsPage = () => {
@@ -50,7 +51,7 @@ const PostsPage = () => {
         </Typography>
         <Grid container spacing={2} sx={{ mt: 4 }}>
           {posts.map((post) => {
-            const imageSrc = post.image || "/text-image.jpg";
+              const imageSrc = post.image ? `${apiUrl}/${post.image}` : "/text-image.jpg";
 
             return (
               <Grid size={12} key={post._id}>
