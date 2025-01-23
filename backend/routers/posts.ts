@@ -18,6 +18,7 @@ postsRouter.get("/", auth, async (req, res, next) => {
         }
 
         const posts = await Post.find()
+            .sort({ datetime: -1 })
             .populate("user", "username")
             .exec();
 
