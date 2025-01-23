@@ -34,3 +34,9 @@ export interface ValidationError {
 export interface GlobalError {
   error: string;
 }
+
+export interface PostMutation {
+  title: string;
+  description: string;
+  image: File | null;
+}

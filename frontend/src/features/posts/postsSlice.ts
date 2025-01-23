@@ -1,6 +1,6 @@
 import {createSlice} from '@reduxjs/toolkit';
 import {RootState} from '../../app/store.ts';
-import {fetchPosts, getPostById} from './postsThunk.ts';
+import { addNewPost, fetchPosts, getPostById } from './postsThunk.ts';
 
 
 export interface IPost {
@@ -61,7 +61,18 @@ export const slicePosts = createSlice({
         .addCase(getPostById.rejected, (state) => {
             state.isLoading = false;
             state.error = true;
-        });
+        })
+        .addCase(addNewPost.pending, (state) => {
+          state.isLoading = true;
+          state.error = false;
+        })
+        .addCase(addNewPost.fulfilled, (state) => {
+          state.isLoading = false;
+        })
+        .addCase(addNewPost.rejected, (state) => {
+          state.isLoading = false;
+          state.error = true;
+        })
   },
 });
 
