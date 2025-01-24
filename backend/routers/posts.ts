@@ -11,7 +11,7 @@ postsRouter.get("/", async (req, res, next) => {
     try {
         const posts = await Post.find()
             .sort({ datetime: -1 })
-            .populate("user", "username")
+            .populate("user", "-_id username")
             .exec();
 
         const postsWithCommentCount = await Promise.all(
@@ -40,7 +40,7 @@ postsRouter.get("/:id",  async (req, res, next) => {
 
     try {
         const post = await Post.findById(id)
-            .populate("user", "username");
+            .populate("user", "-_id username");
 
         if (!post) res.status(404).send('Not Found');
 
