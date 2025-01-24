@@ -2,6 +2,7 @@ import express from "express";
 import auth, {RequestWithUser} from "../middleware/auth";
 import mongoose from "mongoose";
 import Post from "../models/Post";
+import Comment from "../models/Comment";
 import {imagesUpload} from "../multer";
 
 const postsRouter = express.Router();
@@ -13,7 +14,14 @@ postsRouter.get("/", async (req, res, next) => {
             .populate("user", "username")
             .exec();
 
-        res.status(200).send(posts);
+        const postsWithCommentCount = await Promise.all(
+            posts.map(async (post) => {
+                const commentCount = await Comment.countDocuments({ post: post._id });
+                return { ...post.toObject(), commentCount };
+            })
+        );
+
+        res.status(200).send(postsWithCommentCount);
     } catch (error) {
         if (error instanceof mongoose.Error.ValidationError) {
             res.status(400).send(error);
