@@ -93,7 +93,7 @@ const PostDetails = () => {
               mt: 2
             }}
           />
-          <Typography variant="body1" mt={2}> "{postDetails.description}" </Typography>
+          <Typography variant="body1" mt={2}> {postDetails.description} </Typography>
         </CardContent>
         <CardContent sx={{flexDirection: 'column'}}>
           <hr/>

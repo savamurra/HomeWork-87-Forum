@@ -6,11 +6,18 @@ import { addNewPost, fetchPosts } from './postsThunk.ts';
 import { toast } from 'react-toastify';
 import { CircularProgress } from '@mui/material';
 import PostForm from './PostForm.tsx';
+import { selectUser } from '../users/userSlice.ts';
 
 const NewPost = () => {
   const dispatch = useAppDispatch();
   const loading = useAppSelector(selectLoading);
   const navigate = useNavigate();
+
+  const user = useAppSelector(selectUser);
+
+  if (!user) {
+    navigate('/login');
+  }
 
   const onSubmitForm = async (post: PostMutation) => {
     try {
