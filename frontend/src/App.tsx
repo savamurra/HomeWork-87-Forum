@@ -19,6 +19,7 @@ const App = () => {
         <Container maxWidth="xl">
           <Routes>
             <Route path="/" element={<PostsPage />} />
+            <Route path="/post" element={<PostsPage />} />
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/posts/:id" element={<PostDetails />} />
