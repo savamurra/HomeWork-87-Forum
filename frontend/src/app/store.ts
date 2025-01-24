@@ -1,10 +1,17 @@
-import { combineReducers, configureStore } from '@reduxjs/toolkit';
-import storage from 'redux-persist/lib/storage';
-import { persistReducer, persistStore } from 'redux-persist';
-import { FLUSH, PAUSE, PERSIST, PURGE, REGISTER, REHYDRATE, } from 'redux-persist/es/constants';
-import { usersReducer } from '../features/users/userSlice.ts';
-import { postsReducer } from '../features/posts/postsSlice.ts';
-import { commentsReducer } from '../features/comments/commentsSlice.ts';
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
+import storage from "redux-persist/lib/storage";
+import { persistReducer, persistStore } from "redux-persist";
+import {
+  FLUSH,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+  REHYDRATE,
+} from "redux-persist/es/constants";
+import { usersReducer } from "../features/users/userSlice.ts";
+import { postsReducer } from "../features/posts/postsSlice.ts";
+import { commentsReducer } from "../features/comments/commentsSlice.ts";
 
 const usersPersistConfig = {
   key: "store:users",

@@ -1,10 +1,10 @@
-import { useAppDispatch, useAppSelector } from '../../app/hooks.ts';
-import { useNavigate } from 'react-router-dom';
-import { PostMutation } from '../../types';
-import { addNewPost, fetchPosts } from './postsThunk.ts';
-import { toast } from 'react-toastify';
-import PostForm from './PostForm.tsx';
-import { selectUser } from '../users/userSlice.ts';
+import { useAppDispatch, useAppSelector } from "../../../app/hooks.ts";
+import { useNavigate } from "react-router-dom";
+import { PostMutation } from "../../../types";
+import { addNewPost, fetchPosts } from "../postsThunk.ts";
+import { toast } from "react-toastify";
+import PostForm from "./PostForm.tsx";
+import { selectUser } from "../../users/userSlice.ts";
 
 const NewPost = () => {
   const dispatch = useAppDispatch();
@@ -13,7 +13,7 @@ const NewPost = () => {
   const user = useAppSelector(selectUser);
 
   if (!user) {
-    navigate('/login');
+    navigate("/login");
   }
 
   const onSubmitForm = async (post: PostMutation) => {

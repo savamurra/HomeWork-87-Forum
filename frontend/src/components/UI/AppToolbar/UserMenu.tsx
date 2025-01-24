@@ -1,10 +1,10 @@
-import { Button, Menu, MenuItem } from '@mui/material';
-import React, { useState } from 'react';
-import { useAppDispatch } from '../../../app/hooks.ts';
-import { unsetUser } from '../../../features/users/userSlice.ts';
-import { logout } from '../../../features/users/userThunks.ts';
-import { UserFields } from '../../../types';
-import { NavLink } from 'react-router-dom';
+import { Button, Menu, MenuItem } from "@mui/material";
+import React, { useState } from "react";
+import { useAppDispatch } from "../../../app/hooks.ts";
+import { unsetUser } from "../../../features/users/userSlice.ts";
+import { logout } from "../../../features/users/userThunks.ts";
+import { UserFields } from "../../../types";
+import { NavLink } from "react-router-dom";
 
 interface Props {
   user: UserFields;
@@ -45,7 +45,10 @@ const UserMenu: React.FC<Props> = ({ user }) => {
             color: "blue",
           },
         }}
-        component={NavLink} to="/add-new-post" color="inherit">
+        component={NavLink}
+        to="/add-new-post"
+        color="inherit"
+      >
         Add new post
       </Button>
       <Menu

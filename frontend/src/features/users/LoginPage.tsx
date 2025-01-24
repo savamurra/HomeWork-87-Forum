@@ -6,7 +6,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
 import Grid from "@mui/material/Grid2";
 import Box from "@mui/material/Box";
-import LockOpen from '@mui/icons-material/LockOpen';
+import LockOpen from "@mui/icons-material/LockOpen";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { useAppDispatch, useAppSelector } from "../../app/hooks.ts";
@@ -65,18 +65,20 @@ const RegisterPage = () => {
             {loginError.error}
           </Alert>
         )}
-        <Box component="form" noValidate onSubmit={onSubmit}
-             sx={{
-               width: "100%",
-               mt: 3,
-               borderRadius: "20px",
-               boxShadow: "0 4px 12px rgba(0, 0, 0, 0.9)",
-               p: 4
-         }}
+        <Box
+          component="form"
+          noValidate
+          onSubmit={onSubmit}
+          sx={{
+            width: "100%",
+            mt: 3,
+            borderRadius: "20px",
+            boxShadow: "0 4px 12px rgba(0, 0, 0, 0.9)",
+            p: 4,
+          }}
         >
           <Grid container direction={"column"} size={12} spacing={2}>
-            <Grid size={12}
-            >
+            <Grid size={12}>
               <TextField
                 fullWidth
                 id="username"

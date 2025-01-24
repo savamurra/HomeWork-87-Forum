@@ -1,9 +1,7 @@
-import { Button } from '@mui/material';
-import { Link as NavLink } from 'react-router-dom';
-
+import { Button } from "@mui/material";
+import { Link as NavLink } from "react-router-dom";
 
 const AnonymousMenu = () => {
-
   return (
     <>
       <Button

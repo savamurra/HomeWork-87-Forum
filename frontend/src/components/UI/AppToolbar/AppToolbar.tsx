@@ -4,7 +4,7 @@ import { useAppSelector } from "../../../app/hooks.ts";
 import { selectUser } from "../../../features/users/userSlice.ts";
 import AnonymousMenu from "./AnonymousMenu.tsx";
 import UserMenu from "./UserMenu.tsx";
-import Container from '@mui/material/Container';
+import Container from "@mui/material/Container";
 
 const Link = styled(NavLink)({
   color: "#fff",
@@ -20,7 +20,6 @@ const StyledAppBar = styled(AppBar)({
   background: "linear-gradient(90deg, #4b6cb7, #182848)",
   boxShadow: "0 4px 10px rgba(0, 0, 0, 0.3)",
 });
-
 
 const AppToolbar = () => {
   const user = useAppSelector(selectUser);

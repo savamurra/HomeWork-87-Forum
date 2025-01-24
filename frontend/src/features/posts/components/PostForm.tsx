@@ -1,13 +1,13 @@
-import React, { ChangeEvent, FormEvent, useState } from 'react';
-import { PostMutation } from '../../types';
-import Grid from '@mui/material/Grid2';
-import { Button, TextField } from '@mui/material';
-import FileInput from '../../components/FileInput/FileInput.tsx';
-import { toast } from 'react-toastify';
-import Typography from '@mui/material/Typography';
-import { useAppSelector } from '../../app/hooks.ts';
-import { selectLoading } from './postsSlice.ts';
-import Spinner from '../../components/UI/Spinner/Spinner.tsx';
+import React, { ChangeEvent, FormEvent, useState } from "react";
+import { PostMutation } from "../../../types";
+import Grid from "@mui/material/Grid2";
+import { Button, TextField } from "@mui/material";
+import FileInput from "../../../components/FileInput/FileInput.tsx";
+import { toast } from "react-toastify";
+import Typography from "@mui/material/Typography";
+import { useAppSelector } from "../../../app/hooks.ts";
+import { selectLoading } from "../postsSlice.ts";
+import Spinner from "../../../components/UI/Spinner/Spinner.tsx";
 
 interface Props {
   onSubmit: (product: PostMutation) => void;
@@ -26,17 +26,12 @@ const PostForm: React.FC<Props> = ({ onSubmit }) => {
   const submitFormHandler = (e: FormEvent) => {
     e.preventDefault();
 
-
     if (!form.title) {
-      return (
-        toast.error("Заголовок обязателен!")
-      )
+      return toast.error("Заголовок обязателен!");
     }
 
     if (!form.description && !form.image) {
-      return (
-        toast.error("Добавьте либо описание, либо изображение!")
-      )
+      return toast.error("Добавьте либо описание, либо изображение!");
     }
 
     onSubmit({ ...form });
@@ -63,8 +58,16 @@ const PostForm: React.FC<Props> = ({ onSubmit }) => {
     <>
       <Typography
         variant="h5"
-        sx={{ mt: 4, textAlign: "center", fontWeight: 'bold',  textShadow: "2px 2px 4px rgba(0, 0, 0, 0.2)", color: "#041f4e" }}
-      >Add new post</Typography>
+        sx={{
+          mt: 4,
+          textAlign: "center",
+          fontWeight: "bold",
+          textShadow: "2px 2px 4px rgba(0, 0, 0, 0.2)",
+          color: "#041f4e",
+        }}
+      >
+        Add new post
+      </Typography>
       <form onSubmit={submitFormHandler}>
         <Grid
           container
@@ -76,7 +79,7 @@ const PostForm: React.FC<Props> = ({ onSubmit }) => {
             mt: 4,
             padding: "20px",
             borderRadius: "20px",
-            boxShadow: "0 4px 12px rgba(0, 0, 0, 0.9)"
+            boxShadow: "0 4px 12px rgba(0, 0, 0, 0.9)",
           }}
         >
           <Grid>
@@ -89,7 +92,7 @@ const PostForm: React.FC<Props> = ({ onSubmit }) => {
               fullWidth
               sx={{
                 borderRadius: "8px",
-                '& .MuiInputBase-root': {
+                "& .MuiInputBase-root": {
                   backgroundColor: "#fff",
                   borderRadius: "8px",
                   boxShadow: "0 2px 8px rgba(0, 0, 0, 0.05)",
@@ -129,7 +132,7 @@ const PostForm: React.FC<Props> = ({ onSubmit }) => {
                 borderRadius: "20px",
                 textTransform: "uppercase",
                 padding: "12px",
-                '&:hover': {
+                "&:hover": {
                   background: "linear-gradient(90deg, #2563EB, #1E3A8A)",
                   transform: "scale(1.05)",
                   boxShadow: "0 4px 16px rgba(0, 0, 0, 0.15)",
@@ -137,7 +140,7 @@ const PostForm: React.FC<Props> = ({ onSubmit }) => {
               }}
               disabled={loading}
             >
-              {loading ? <Spinner /> : 'Create'}
+              {loading ? <Spinner /> : "Create"}
             </Button>
           </Grid>
         </Grid>

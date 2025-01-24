@@ -43,7 +43,7 @@ export interface PostMutation {
 
 export interface IComment {
   _id: string;
-  user: {username: string};
+  user: { username: string };
   post: string;
   text: string;
 }
