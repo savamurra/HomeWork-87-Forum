@@ -11,6 +11,7 @@ import { getCommentsByQuery } from '../comments/commentsThunk.ts';
 import Comments from '../comments/Comments.tsx';
 import NewComment from '../components/CommentsForm/NewComment.tsx';
 import { selectUser } from '../users/userSlice.ts';
+import Box from '@mui/material/Box';
 
 const PostDetails = () => {
   const { id } = useParams<{ id: string }>();
@@ -95,6 +96,8 @@ const PostDetails = () => {
           <Typography variant="body1" mt={2}> "{postDetails.description}" </Typography>
         </CardContent>
         <CardContent sx={{flexDirection: 'column'}}>
+          <hr/>
+          {user ? (<NewComment _id={postDetails._id}/>) : null}
           <Typography
             variant="h6"
             sx={{
@@ -107,14 +110,22 @@ const PostDetails = () => {
           >
             Comments:
           </Typography>
-          {!comments ? (<Typography>Not found comments</Typography>) : (
-            <>
+          {comments.length === 0 ? (<Typography sx={{textAlign: "center", mb: 2}}>Not found comments</Typography>) : (
+            <Box
+              sx={{
+              maxHeight: '300px',
+              overflowY: 'auto',
+              border: '1px solid #ccc',
+              borderRadius: '8px',
+              padding: 2,
+              backgroundColor: '#f9f9f9'
+            }}
+            >
               {comments.map((comment) => (
                 <Comments key={comment._id} _id={comment._id} user={comment.user.username} text={comment.text}/>
               )).reverse()}
-            </>
+            </Box>
           )}
-          {user ? (<NewComment _id={postDetails._id}/>) : null}
         </CardContent>
       </Card>
     </>

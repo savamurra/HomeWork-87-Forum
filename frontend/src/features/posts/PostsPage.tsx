@@ -114,6 +114,9 @@ const PostsPage = () => {
                       >
                         {post.title}...
                       </Typography>
+                      <Typography sx={{ fontSize: 16, fontWeight: "bold", color: 'grey', mt: 1 }}>
+                        Amount of comments: <span style={{ color: 'green', fontWeight: 'bold' }}>{post.commentCount}</span>
+                      </Typography>
                     </div>
                   </CardContent>
                 </Card>

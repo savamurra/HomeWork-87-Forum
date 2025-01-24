@@ -5,6 +5,7 @@ import { addNewPost, fetchPosts, getPostById } from './postsThunk.ts';
 
 export interface IPost {
   _id: string;
+  commentCount: number;
   user: { username: string };
   title: string;
   image: string | null;
