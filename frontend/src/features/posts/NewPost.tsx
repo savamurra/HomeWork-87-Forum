@@ -1,16 +1,13 @@
 import { useAppDispatch, useAppSelector } from '../../app/hooks.ts';
-import { selectLoading } from './postsSlice.ts';
 import { useNavigate } from 'react-router-dom';
 import { PostMutation } from '../../types';
 import { addNewPost, fetchPosts } from './postsThunk.ts';
 import { toast } from 'react-toastify';
-import { CircularProgress } from '@mui/material';
 import PostForm from './PostForm.tsx';
 import { selectUser } from '../users/userSlice.ts';
 
 const NewPost = () => {
   const dispatch = useAppDispatch();
-  const loading = useAppSelector(selectLoading);
   const navigate = useNavigate();
 
   const user = useAppSelector(selectUser);
@@ -31,11 +28,7 @@ const NewPost = () => {
   };
   return (
     <>
-      {loading ? (
-        <CircularProgress />
-      ) : (
-        <PostForm onSubmit={onSubmitForm} />
-      )}
+      <PostForm onSubmit={onSubmitForm} />
     </>
   );
 };

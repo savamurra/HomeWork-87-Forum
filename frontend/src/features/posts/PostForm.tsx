@@ -5,6 +5,9 @@ import { Button, TextField } from '@mui/material';
 import FileInput from '../../components/FileInput/FileInput.tsx';
 import { toast } from 'react-toastify';
 import Typography from '@mui/material/Typography';
+import { useAppSelector } from '../../app/hooks.ts';
+import { selectLoading } from './postsSlice.ts';
+import Spinner from '../../components/UI/Spinner/Spinner.tsx';
 
 interface Props {
   onSubmit: (product: PostMutation) => void;
@@ -18,6 +21,7 @@ const initialState = {
 
 const PostForm: React.FC<Props> = ({ onSubmit }) => {
   const [form, setForm] = useState<PostMutation>(initialState);
+  const loading = useAppSelector(selectLoading);
 
   const submitFormHandler = (e: FormEvent) => {
     e.preventDefault();
@@ -131,8 +135,9 @@ const PostForm: React.FC<Props> = ({ onSubmit }) => {
                   boxShadow: "0 4px 16px rgba(0, 0, 0, 0.15)",
                 },
               }}
+              disabled={loading}
             >
-              Create
+              {loading ? <Spinner /> : 'Create'}
             </Button>
           </Grid>
         </Grid>

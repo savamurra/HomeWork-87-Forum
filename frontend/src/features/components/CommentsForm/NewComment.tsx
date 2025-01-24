@@ -4,9 +4,11 @@ import Grid from '@mui/material/Grid2';
 import React, { ChangeEvent, FormEvent, useState } from 'react';
 import { ICommentMutation } from '../../../types';
 import { toast } from 'react-toastify';
-import { useAppDispatch } from '../../../app/hooks.ts';
+import { useAppDispatch, useAppSelector } from '../../../app/hooks.ts';
 import { addNewComment, getCommentsByQuery } from '../../comments/commentsThunk.ts';
 import Typography from '@mui/material/Typography';
+import { selectCreateLoading } from '../../comments/commentsSlice.ts';
+import Spinner from '../../../components/UI/Spinner/Spinner.tsx';
 
 interface Props {
   _id: string;
@@ -22,6 +24,7 @@ const NewComment: React.FC<Props> = ({_id}) => {
 
   const [form, setForm] = useState<ICommentMutation>(initialState);
   const dispatch = useAppDispatch();
+  const createLoading = useAppSelector(selectCreateLoading);
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -83,8 +86,9 @@ const NewComment: React.FC<Props> = ({_id}) => {
               sx={{
                 background: "linear-gradient(90deg, #1E3A8A, #2563EB)",
               }}
+              disabled={createLoading}
             >
-              Add
+              {createLoading ? <Spinner /> : 'Add'}
             </Button>
           </Grid>
         </Grid>

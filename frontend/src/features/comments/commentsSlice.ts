@@ -6,18 +6,21 @@ import { RootState } from '../../app/store.ts';
 interface commentState {
   comments: IComment[];
   isLoading: boolean,
+  createLoading: boolean,
   error: boolean,
 }
 
 const initialState: commentState = {
   comments: [],
   isLoading: false,
+  createLoading: false,
   error: false,
 }
 
 export const selectComments = (state: RootState) => state.comments.comments;
 export const selectLoadingComments = (state: RootState) => state.comments.isLoading;
 export const selectErrorComments = (state: RootState) => state.comments.error;
+export const selectCreateLoading = (state: RootState) => state.comments.createLoading;
 
 export const commentsSlice = createSlice({
   name: "comments",
@@ -38,14 +41,14 @@ export const commentsSlice = createSlice({
         state.error = true;
       })
       .addCase(addNewComment.pending, (state) => {
-        state.isLoading = true;
+        state.createLoading = true;
         state.error = false;
       })
       .addCase(addNewComment.fulfilled, (state) => {
-        state.isLoading = false;
+        state.createLoading = false;
       })
       .addCase(addNewComment.rejected, (state) => {
-        state.isLoading = false;
+        state.createLoading = false;
         state.error = true;
       })
   }})
