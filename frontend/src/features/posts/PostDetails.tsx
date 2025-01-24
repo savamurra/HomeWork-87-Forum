@@ -5,9 +5,9 @@ import { useEffect } from 'react';
 import { getPostById } from './postsThunk.ts';
 import { useParams } from 'react-router-dom';
 import dayjs from 'dayjs';
-import {apiUrl} from "../../globalConstants.ts";
+import { apiUrl } from '../../globalConstants.ts';
 import { selectComments, selectErrorComments, selectLoadingComments } from '../comments/commentsSlice.ts';
-import {  getCommentsByQuery } from '../comments/commentsThunk.ts';
+import { getCommentsByQuery } from '../comments/commentsThunk.ts';
 import Comments from '../comments/Comments.tsx';
 import NewComment from '../components/CommentsForm/NewComment.tsx';
 import { selectUser } from '../users/userSlice.ts';
@@ -51,12 +51,6 @@ const PostDetails = () => {
 
   return (
     <>
-      <Typography
-        variant="h4"
-        sx={{ mt: 4, textAlign: "center", fontWeight: 'bold' }}
-      >
-        Post details
-      </Typography>
       <Card
         sx={{
           minWidth: 275,
@@ -67,8 +61,26 @@ const PostDetails = () => {
         }}
       >
         <CardContent>
-          <Typography variant="h4" gutterBottom>{postDetails.title}</Typography>
-
+          <Typography
+            variant="h5"
+            sx={{
+              mb:2,
+              fontWeight: 'bold',
+              color: "#041f4e",
+              textShadow: "2px 2px 4px rgba(0, 0, 0, 0.2)"
+            }}
+          >
+            {postDetails.title}
+          </Typography>
+          <Typography variant="body2" color="textSecondary" mt={2}>
+            Posted on {dayjs(postDetails.datetime).format('YYYY-MM-DD HH:mm:ss')} {" "}
+            by {" "}
+            <span
+              style={{ color: 'green', fontWeight: 'bold' }}>
+              {postDetails.user.username}
+            </span>
+          </Typography>
+          <hr/>
           <CardMedia
             component="img"
             src={imageSrc}
@@ -80,12 +92,21 @@ const PostDetails = () => {
               mt: 2
             }}
           />
-
-          <Typography variant="body1" mt={2}>{postDetails.description}</Typography>
-          <Typography variant="body2" color="textSecondary" mt={2}>
-            Posted on {dayjs(postDetails.datetime).format('YYYY-MM-DD HH:mm:ss')} by {postDetails.user.username}
+          <Typography variant="body1" mt={2}> "{postDetails.description}" </Typography>
+        </CardContent>
+        <CardContent sx={{flexDirection: 'column'}}>
+          <Typography
+            variant="h6"
+            sx={{
+              mb:2,
+              textAlign: "center",
+              fontWeight: 'bold',
+              color: "#041f4e",
+              textShadow: "2px 2px 4px rgba(0, 0, 0, 0.2)"
+            }}
+          >
+            Comments:
           </Typography>
-          <hr/>
           {!comments ? (<Typography>Not found comments</Typography>) : (
             <>
               {comments.map((comment) => (

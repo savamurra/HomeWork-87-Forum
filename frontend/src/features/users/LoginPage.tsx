@@ -65,9 +65,18 @@ const RegisterPage = () => {
             {loginError.error}
           </Alert>
         )}
-        <Box component="form" noValidate onSubmit={onSubmit} sx={{ mt: 3 }}>
+        <Box component="form" noValidate onSubmit={onSubmit}
+             sx={{
+               width: "100%",
+               mt: 3,
+               borderRadius: "20px",
+               boxShadow: "0 4px 12px rgba(0, 0, 0, 0.9)",
+               p: 4
+         }}
+        >
           <Grid container direction={"column"} size={12} spacing={2}>
-            <Grid size={12}>
+            <Grid size={12}
+            >
               <TextField
                 fullWidth
                 id="username"

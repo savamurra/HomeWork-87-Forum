@@ -2,6 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import axiosApi from '../../axiosApi.ts';
 import { IPost } from './postsSlice.ts';
 import { PostMutation } from '../../types';
+import { RootState } from '../../app/store.ts';
 
 export const fetchPosts = createAsyncThunk<IPost[], void>(
   "posts/fetchPosts",

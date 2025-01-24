@@ -72,7 +72,15 @@ const RegisterPage = () => {
         <Typography component="h1" variant="h5">
           Sign up
         </Typography>
-        <Box component="form" noValidate onSubmit={onSubmit} sx={{ mt: 3 }}>
+        <Box component="form" noValidate onSubmit={onSubmit}
+             sx={{
+               width: "100%",
+               mt: 3,
+               borderRadius: "20px",
+               boxShadow: "0 4px 12px rgba(0, 0, 0, 0.9)",
+               p: 4
+             }}
+        >
           <Grid container direction={"column"} size={12} spacing={2}>
             <Grid size={12}>
               <TextField

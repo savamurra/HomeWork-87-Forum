@@ -43,7 +43,13 @@ const PostsPage = () => {
       <>
         <Typography
           variant="h4"
-          sx={{ mt: 4, textAlign: "center", fontWeight: 'bold' }}
+          sx={{
+            mt: 4,
+            textAlign: "center",
+            fontWeight: 'bold',
+            color: "#041f4e",
+            textShadow: "2px 2px 4px rgba(0, 0, 0, 0.2)"
+        }}
         >
           Posts
         </Typography>
@@ -56,15 +62,21 @@ const PostsPage = () => {
                 <Card
                   sx={{
                     minWidth: 300,
-                    borderRadius: "10px",
-                    boxShadow: '0 4px 12px rgba(0, 0, 0, 5)',
+                    borderRadius: "20px",
+                    boxShadow: "0 8px 20px rgba(0, 0, 0, 0.9)",
+                    transition: "transform 0.3s, box-shadow 0.3s",
+                    "&:hover": {
+                      transform: "scale(1.05)",
+                      boxShadow: "0 12px 25px rgba(0, 0, 0, 0.2)",
+                    },
                   }}
                 >
                   <CardContent
                     sx={{
                       display: "flex",
                       alignItems: "center",
-                      flexDirection: "row"
+                      flexDirection: "row",
+                      p: 2,
                     }}
                   >
                     <CardMedia
@@ -77,19 +89,30 @@ const PostsPage = () => {
                         height: "100px",
                         objectFit: "cover",
                         mr: 2,
+                        border: "3px solid grey",
+                        boxShadow: "0 4px 10px rgba(0, 0, 0, 0.2)",
                       }}
                     />
                     <div>
                       <Typography sx={{ fontSize: 16, fontWeight: "bold", color: 'grey' }}>
                         <span>{dayjs(post.datetime).format('YYYY-MM-DD HH:mm:ss')}</span>{" "}
-                        by {post.user.username}
+                        by <span style={{ color: 'green', fontWeight: 'bold' }}>{post.user.username}</span>
                       </Typography>
                       <Typography
                           component={NavLink}
                           to={`/posts/${post._id}`}
-                        sx={{ fontSize: 15, fontWeight: "bold", flexGrow: 1 }}
+                          sx={{
+                              fontSize: 16,
+                              fontWeight: "bold",
+                              flexGrow: 1,
+                              color: "#2163f6",
+                              "&:hover": {
+                                color: "#3b82f6",
+                                textDecoration: "underline",
+                              },
+                            }}
                       >
-                        {post.title}
+                        {post.title}...
                       </Typography>
                     </div>
                   </CardContent>

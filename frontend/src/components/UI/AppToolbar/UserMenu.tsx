@@ -27,11 +27,26 @@ const UserMenu: React.FC<Props> = ({ user }) => {
   };
   return (
     <>
-      <Button component={NavLink} to="/add-new-post" color="inherit">
-        Add new post
-      </Button>
       <Button onClick={handleClick} color="inherit">
         Hello, {user.username}!
+      </Button>
+      <Button
+        sx={{
+          fontWeight: "bold",
+          color: "#fff",
+          border: "1px solid #fff",
+          borderRadius: "20px",
+          textTransform: "none",
+          margin: "0 8px",
+          padding: "5px 20px",
+          transition: "all 0.3s",
+          "&:hover": {
+            backgroundColor: "white",
+            color: "blue",
+          },
+        }}
+        component={NavLink} to="/add-new-post" color="inherit">
+        Add new post
       </Button>
       <Menu
         anchorEl={anchorEl}
