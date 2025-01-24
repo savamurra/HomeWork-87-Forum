@@ -27,5 +27,7 @@ export default tseslint.config(
       semi: ["error", "always"],
       quotes: ["error", "single"],
     },
+    semi: ["error"],
+    "react-hooks/exhaustive-deps": ["error"],
   },
 );
